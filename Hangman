@@ -1,0 +1,43 @@
+import random
+
+def play_game():
+    words = ["apple", "banana", "kiwi", "orange", "pineapple", "mango"]
+    word = random.choice(words)
+    guessed_letters = []
+    attempts = 6
+
+    print("Welcome to Hangman!")
+    print("Guess the secret word.")
+
+    while attempts > 0:
+        hidden_word = ""
+
+        for letter in word:
+            if letter in guessed_letters:
+                hidden_word += letter
+            else:
+                hidden_word += "_"
+
+        print(f"Secret word: {hidden_word}")
+        print(f"Attempts remaining: {attempts}")
+
+        if hidden_word == word:
+            print("Congratulations! You guessed the word!")
+            break
+
+        guess = input("Enter a letter: ").lower()
+
+        if guess in guessed_letters:
+            print("You've already guessed that letter. Try again!")
+            continue
+
+        guessed_letters.append(guess)
+
+        if guess not in word:
+            print("Wrong letter.")
+            attempts -= 1
+
+    if attempts == 0:
+        print("Unfortunately, you didn't guess the word. Game over.")
+
+play_game()
